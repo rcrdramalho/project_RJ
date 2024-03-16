@@ -97,9 +97,3 @@ button.addEventListener('click', function() {
     }
   });
 });
-
-/*
-regioesData.features.forEach(function(feature)){
-    if(bairroPrinc)
-}
-*/
