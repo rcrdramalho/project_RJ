@@ -1,0 +1,160 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(15, 11, 32); /* Define o fundo preto */
+    color: white; /* Define as letras brancas */
+}
+
+#app {
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza verticalmente */
+}
+
+#app h1 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+#app p {
+    margin-bottom: 10px;
+}
+
+#mapa {
+    border: 1px solid #ddd;
+    height: 400px;
+    width: 600px;
+}
+
+#painel-jogo {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bairro-input {
+    width: 500px;
+    height: 35px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Adiciona bordas arredondadas */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+    outline: none; /* Remove o contorno ao focar */
+}
+
+#bairro-input:focus {
+    border-color: #66afe9; /* Muda a cor da borda ao focar */
+}
+
+#enviar-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Adiciona bordas arredondadas */
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white; /* Cor do texto branco */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Adiciona uma transição suave */
+}
+
+#enviar-btn:hover {
+    background-color: #45a049; /* Muda a cor de fundo ao passar o mouse */
+}
+
+#resultado {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.awesomplete {
+    display: inline-block;
+    position: relative;
+}
+
+.awesomplete > input {
+    display: block;
+}
+
+.awesomplete > ul {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    min-width: 100%;
+    box-sizing: border-box;
+    list-style: none;
+    padding: 0;
+    border-radius: .3em;
+    margin: .2em 0 0;
+    background: hsla(0,0%,100%,.9);
+    background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+    text-shadow: none;
+}
+
+.awesomplete > ul[hidden],
+.awesomplete > ul:empty {
+    display: none;
+}
+
+.awesomplete > ul:before {
+    content: "";
+    position: absolute;
+    top: -.43em;
+    left: 1em;
+    width: 0;
+    height: 0;
+    padding: .4em;
+    background: white;
+    border: inherit;
+    border-right: 0;
+    border-bottom: 0;
+    transform: rotate(45deg);
+}
+
+.awesomplete > ul > li {
+    position: relative;
+    padding: .2em .5em;
+    cursor: pointer;
+    color: black; /* Adiciona a cor preta ao texto */
+}
+
+
+.awesomplete > ul > li:hover {
+    background: hsl(200, 40%, 80%);
+    color: black;
+}
+
+.awesomplete > ul > li[aria-selected="true"] {
+    background: hsl(205, 40%, 40%);
+    color: rgb(0, 0, 0);
+}
+
+.awesomplete mark {
+    background: hsla(65, 100%, 50%, 0);
+}
+
+.awesomplete li:hover mark {
+    background: hsla(68, 100%, 41%, 0);
+}
+
+.awesomplete li[aria-selected="true"] mark {
+    background: hsl(86, 100%, 21%);
+    color: inherit;
+}
+
