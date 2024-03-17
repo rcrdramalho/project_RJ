@@ -57,6 +57,9 @@ const nomesBairros = [
   "Joá","Barra de Guaratiba","Grumari","Caju","Deodoro","Lapa","Campo Grande","Bangu","Gericinó","Jabour","Vila Kennedy","Ilha de Guaratiba"
 ]
 
+var acertou = false;
+var bairrocerto = '';
+
 document.addEventListener("DOMContentLoaded", function() {
   new Awesomplete(document.querySelector("#bairro-input"), {
       list: nomesBairros
@@ -99,20 +102,32 @@ button.addEventListener('click', function() {
   
           // Ordena a lista de bairros digitados com base na distância (menor para maior)
           bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
+
   
-          // Atualiza a interface do usuário para mostrar a lista de bairros digitados
-          mostrarBairrosDigitados();
-  
+        if(feature == bairroPrinc){
+          const newPolygonLayer = L.geoJSON(feature, {
+              style: function (feature) {
+                  return {color: "green", fillColor: "green", fillOpacity: 100}; // Defina as cores do polígono conforme necessário
+              },
+          });
+          newPolygonLayer.addTo(mymap);
+          acertou = true;
+          bairrocerto = textoDigitado;
+
+        }else{
           // Cria o novo polígono com a cor correspondente à distância
           const fillColor = calcularCor(distance);
           const newPolygonLayer = L.geoJSON(feature, {
               style: function (feature) {
-                  return {color: "gray", fillColor: fillColor }; // Defina as cores do polígono conforme necessário
+                  return {color: "gray", fillColor: fillColor, fillOpacity: 100}; // Defina as cores do polígono conforme necessário
               },
           });
-  
-          // Adiciona a nova camada de polígono ao mapa
           newPolygonLayer.addTo(mymap);
+        }
+
+        // Atualiza a interface do usuário para mostrar a lista de bairros digitados
+        mostrarBairrosDigitados();
+  
         return;
       }
     });
@@ -121,15 +136,20 @@ button.addEventListener('click', function() {
   // Função para mostrar a lista de bairros digitados
   function mostrarBairrosDigitados() {
       const resultado = document.getElementById('resultado');
-      resultado.innerHTML = '<h2>Chutes - distância</h2>';
-      if (bairrosDigitados.length === 0) {
-          resultado.innerHTML += '<p>Nenhum bairro digitado.</p>';
-      } else {
-          resultado.innerHTML += '<ul>';
-          bairrosDigitados.forEach(function(bairro) {
-              resultado.innerHTML += `<li>${bairro.nome}: ${bairro.distancia.toFixed(2)} km</li>`;
-          });
-          resultado.innerHTML += '</ul>';
+      resultado.innerHTML = '<h2></h2>';
+
+      if(acertou){
+        resultado.innerHTML += `<h1>Bairo correto!! - ${bairrocerto}</h1>`;
+      }else{
+        if (bairrosDigitados.length === 0) {
+            resultado.innerHTML += '<p>Nenhum bairro digitado.</p>';
+        } else {
+            resultado.innerHTML += '<ul>';
+            bairrosDigitados.forEach(function(bairro) {
+                resultado.innerHTML += `<li>${bairro.nome}: ${bairro.distancia.toFixed(2)} km</li>`;
+            });
+            resultado.innerHTML += '</ul>';
+        }
       }
   }
 

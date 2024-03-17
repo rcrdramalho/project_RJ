@@ -95,6 +95,7 @@ body {
 
 .awesomplete > input {
     display: block;
+    width: 100%;
 }
 
 .awesomplete > ul {
@@ -107,12 +108,13 @@ body {
     padding: 0;
     border-radius: .3em;
     margin: .2em 0 0;
-    background: hsla(0,0%,100%,.9);
+    background: hsla(0, 0%, 100%, 0.9);
     background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
     border: 1px solid rgba(0,0,0,.3);
     box-shadow: .05em .2em .6em rgba(0,0,0,.2);
     text-shadow: none;
 }
+
 
 .awesomplete > ul[hidden],
 .awesomplete > ul:empty {
@@ -143,8 +145,8 @@ body {
 
 
 .awesomplete > ul > li:hover {
-    background: hsl(200, 40%, 80%);
-    color: black;
+    background: rgb(15, 11, 32);
+    color: rgb(255, 255, 255);
 }
 
 .awesomplete > ul > li[aria-selected="true"] {
@@ -157,7 +159,8 @@ body {
 }
 
 .awesomplete li:hover mark {
-    background: hsla(68, 100%, 41%, 0);
+    background: hsla(68, 94%, 51%, 0);
+    color: white;
 }
 
 .awesomplete li[aria-selected="true"] mark {
