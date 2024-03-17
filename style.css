@@ -1,47 +1,39 @@
+/* Adicione suas regras de estilo aqui */
+
+/* Estilos gerais */
 body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: rgb(15, 11, 32); /* Define o fundo preto */
-    color: white; /* Define as letras brancas */
+    background-color: rgb(15, 11, 32);
+    color: white;
 }
 
 #app {
     padding: 20px;
     max-width: 800px;
     width: 100%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centraliza verticalmente */
+    justify-content: center;
 }
 
-#app h1 {
-    font-size: 24px;
-    margin-top: 0;
-}
-
-#app p {
-    margin-bottom: 10px;
-}
-
+/* Estilos para o mapa */
 #mapa {
     border: 1px solid #ddd;
-    height: 600px;
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
 }
 
 #mapid {
     background-color: rgb(214, 226, 255);
-    width: 1000px;
-    height: 600px;
+    width: 100%;
+    height: 400px;
 }
 
-
+/* Estilos para o painel do jogo */
 #painel-jogo {
     margin-top: 20px;
     padding: 20px;
@@ -53,39 +45,51 @@ body {
 }
 
 #bairro-input {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 35px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px; /* Adiciona bordas arredondadas */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
-    outline: none; /* Remove o contorno ao focar */
-}
-
-#bairro-input:focus {
-    border-color: #66afe9; /* Muda a cor da borda ao focar */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    margin-bottom: 10px;
 }
 
 #enviar-btn {
-    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    border: none; /* Remove a borda */
-    border-radius: 5px; /* Adiciona bordas arredondadas */
-    background-color: #4CAF50; /* Cor de fundo verde */
-    color: white; /* Cor do texto branco */
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
     cursor: pointer;
-    transition: background-color 0.3s; /* Adiciona uma transição suave */
+    transition: background-color 0.3s;
 }
 
 #enviar-btn:hover {
-    background-color: #45a049; /* Muda a cor de fundo ao passar o mouse */
+    background-color: #45a049;
 }
 
 #resultado {
     margin-top: 20px;
     padding: 10px;
     border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Estilos para o link do GitHub */
+#github-link img {
+    width: 80px; 
+    height: auto; 
+}
+
+/* Estilos para telas menores */
+@media only screen and (max-width: 600px) {
+    #mapa {
+        height: 300px;
+    }
 }
 
 .awesomplete {
@@ -101,18 +105,20 @@ body {
 .awesomplete > ul {
     position: absolute;
     left: 0;
+    top: 100%;
     z-index: 1;
     min-width: 100%;
     box-sizing: border-box;
     list-style: none;
     padding: 0;
     border-radius: .3em;
-    margin: .2em 0 0;
-    background: hsla(0, 0%, 100%, 0.9);
+    background: hsla(0,0%,100%,.9);
     background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
     border: 1px solid rgba(0,0,0,.3);
     box-shadow: .05em .2em .6em rgba(0,0,0,.2);
     text-shadow: none;
+    max-height: 200px; /* Defina uma altura máxima para a lista */
+    overflow-y: auto; /* Adicione uma barra de rolagem vertical conforme necessário */
 }
 
 
@@ -203,4 +209,3 @@ body {
     width: 80px; 
     height: auto; 
   }
-  
