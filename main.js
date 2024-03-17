@@ -35,7 +35,7 @@ const newPolygonLayer = leaflet.geoJSON(bairroPrinc, {
     },
 });
 const setZoom = Math.floor(Math.random() * 5) + 11;
-const mymap = leaflet.map("mapid").setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), setZoom);
+const mymap = leaflet.map("mapid",{minZoom:10.5,}).setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), setZoom);
 newPolygonLayer.addTo(mymap);
 
 //Declarando variáveis para o jogo
@@ -91,7 +91,9 @@ button.addEventListener('click', function() {
         }
 
         mostrarBairrosDigitados();
-  
+        
+        input.value = '';
+
         return;
       }
     });
