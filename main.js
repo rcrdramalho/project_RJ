@@ -105,7 +105,7 @@ button.addEventListener('click', function() {
       resultado.innerHTML = '<h2></h2>';
 
       if(acertou){
-        resultado.innerHTML += `<h1>Bairo correto!! - ${bairrocerto}</h1>`;
+        resultado.innerHTML += `<h1>Bairro correto!! - ${bairrocerto}</h1>`;
       }else{
         if (bairrosDigitados.length === 0) {
             resultado.innerHTML += '<p>Nenhum bairro digitado.</p>';
