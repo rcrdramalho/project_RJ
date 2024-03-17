@@ -31,9 +31,16 @@ body {
 
 #mapa {
     border: 1px solid #ddd;
-    height: 400px;
-    width: 600px;
+    height: 700px;
+    width: 1200px;
 }
+
+#mapid {
+    background-color: rgb(214, 226, 255);
+    width: 1200px;
+    height: 700px;
+}
+
 
 #painel-jogo {
     margin-top: 20px;
@@ -131,7 +138,7 @@ body {
     position: relative;
     padding: .2em .5em;
     cursor: pointer;
-    color: black; /* Adiciona a cor preta ao texto */
+    color: black;
 }
 
 
@@ -158,3 +165,39 @@ body {
     color: inherit;
 }
 
+#resultado {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px; /* Defina uma altura máxima para a lista */
+    overflow-y: auto; /* Adicione uma barra de rolagem vertical conforme necessário */
+}
+
+
+.botao-regioes {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.botao-regioes:hover {
+    background-color: #45a049;
+}
+
+.botao-regioes span {
+    display: block;
+    font-size: 16px;
+}
+
+#github-link img {
+    width: 80px; 
+    height: auto; 
+  }
+  

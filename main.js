@@ -15,11 +15,8 @@ const newPolygonLayer = leaflet.geoJSON(bairroPrinc, {
     style: function (feature) {
         return { color: feature.properties.color };
     },
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.description);
-    },
-    interactive: false
 });
+
 
 // Cria um mapa centrado no novo polígono
 const setZoom = Math.floor(Math.random() * 5) + 11;
@@ -34,6 +31,17 @@ mymap.eachLayer(function (layer) {
 
 // Adiciona o novo polígono ao mapa
 newPolygonLayer.addTo(mymap);
+
+/*
+regioesData.features.forEach(function(regiao){
+    var contorno = leaflet.geoJSON(regiao,{
+        style: function(regiao){
+            return {color: regiao.properties.color}
+        }
+    })
+
+    contorno.addTo(mymap);
+}) */
 
 const nomesBairros = [
   "Paquetá","Freguesia (Ilha)","Bancários","Galeão","Tauá","Portuguesa","Moneró","Vigário Geral","Cocotá","Jardim América","Jardim Carioca","Pavuna","Cordovil","Jardim Guanabara","Parada de Lucas",
@@ -69,31 +77,108 @@ input.addEventListener('keyup', function(event) {
 let textoDigitado = '';
 
 // Ouvinte de evento de clique para o botão de enviar
-button.addEventListener('click', function() {
-  // Armazena o texto digitado pelo usuário
-  textoDigitado = input.value;
-  
-  // Percorre a lista de features para buscar a feature com o nome correspondente ao texto digitado
-  bairrosData.features.forEach(function(feature) {
-    // Compara o nome da feature com o texto digitado (ignorando diferenças de maiúsculas e minúsculas)
-    if (feature.properties.nome.toLowerCase() === textoDigitado.toLowerCase()) {
-        const newPolygonLayer = L.geoJSON(feature, {
-            style: function (feature) {
-                return { color: 'red', fillColor: 'yellow' }; // Defina as cores do polígono conforme necessário
-            },
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.nome); // Exibe o nome do bairro no popup
-            }
-        });
-        // Adiciona a nova camada de polígono ao mapa
-        newPolygonLayer.addTo(mymap);
+// Lista para armazenar os bairros digitados e suas distâncias
+const bairrosDigitados = [];
 
-        // Calcula a distância entre os centros dos polígonos
-        const centroid1 = turf.centroid(bairroPrinc).geometry.coordinates;
-        const centroid2 = turf.centroid(feature).geometry.coordinates;
-        const distance = turf.distance(centroid1, centroid2, { units: "kilometers" });
-        console.log(distance);
-      return; // Interrompe o loop forEach após encontrar a feature
-    }
+// Ouvinte de evento de clique para o botão de enviar
+button.addEventListener('click', function() {
+    // Armazena o texto digitado pelo usuário
+    textoDigitado = input.value;
+    
+    // Percorre a lista de features para buscar a feature com o nome correspondente ao texto digitado
+    bairrosData.features.forEach(function(feature) {
+      // Compara o nome da feature com o texto digitado (ignorando diferenças de maiúsculas e minúsculas)
+      if (feature.properties.nome.toLowerCase() === textoDigitado.toLowerCase()) {
+          // Calcula a distância entre os centros dos polígonos
+          const centroid1 = turf.centroid(bairroPrinc).geometry.coordinates;
+          const centroid2 = turf.centroid(feature).geometry.coordinates;
+          const distance = turf.distance(centroid1, centroid2, { units: "kilometers" });
+
+          // Adiciona o nome do bairro digitado e sua distância para o bairro principal à lista
+          bairrosDigitados.push({ nome: feature.properties.nome, distancia: distance });
+  
+          // Ordena a lista de bairros digitados com base na distância (menor para maior)
+          bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
+  
+          // Atualiza a interface do usuário para mostrar a lista de bairros digitados
+          mostrarBairrosDigitados();
+  
+          // Cria o novo polígono com a cor correspondente à distância
+          const fillColor = calcularCor(distance);
+          const newPolygonLayer = L.geoJSON(feature, {
+              style: function (feature) {
+                  return {color: "gray", fillColor: fillColor }; // Defina as cores do polígono conforme necessário
+              },
+          });
+  
+          // Adiciona a nova camada de polígono ao mapa
+          newPolygonLayer.addTo(mymap);
+        return;
+      }
+    });
   });
+  
+  // Função para mostrar a lista de bairros digitados
+  function mostrarBairrosDigitados() {
+      const resultado = document.getElementById('resultado');
+      resultado.innerHTML = '<h2>Chutes - distância</h2>';
+      if (bairrosDigitados.length === 0) {
+          resultado.innerHTML += '<p>Nenhum bairro digitado.</p>';
+      } else {
+          resultado.innerHTML += '<ul>';
+          bairrosDigitados.forEach(function(bairro) {
+              resultado.innerHTML += `<li>${bairro.nome}: ${bairro.distancia.toFixed(2)} km</li>`;
+          });
+          resultado.innerHTML += '</ul>';
+      }
+  }
+
+  function calcularCor(distance) {
+    let red, green;
+    if(distance <= 15){
+        red = 255 - (distance/15)*255;
+        green = 255;
+    } else if(distance <= 25){
+        red = 255;
+        green = (distance/15)*255;
+    } else {
+        red = 255;
+        green = 0;
+    }
+    return `rgb(${red}, ${green}, 42)`;
+}
+
+
+const botaoRegioes = L.Control.extend({
+    options: {
+        position: 'topright'
+    },
+
+    onAdd: function (map) {
+        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+        container.innerHTML = '<button id="botaoRegioes" class="botao-regioes">Mostrar Regiões <span>(modo fácil)</span></button>';
+
+        // Adiciona um evento de clique ao botão para mostrar as regiões
+        container.onclick = function () {
+            regioesData.features.forEach(function(regiao){
+                var contorno = leaflet.geoJSON(regiao,{
+                    style: function(regiao){
+                        return {color: regiao.properties.color}
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(feature.properties.subprefeitura);
+                      },
+                });
+        
+                contorno.addTo(mymap);
+            });
+
+            document.getElementById('botaoRegioes').disabled = true;
+        };
+
+        return container;
+    }
 });
+
+// Adiciona o botão de regiões ao mapa
+mymap.addControl(new botaoRegioes());
