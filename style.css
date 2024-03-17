@@ -31,14 +31,14 @@ body {
 
 #mapa {
     border: 1px solid #ddd;
-    height: 700px;
-    width: 1200px;
+    height: 600px;
+    width: 1000px;
 }
 
 #mapid {
     background-color: rgb(214, 226, 255);
-    width: 1200px;
-    height: 700px;
+    width: 1000px;
+    height: 600px;
 }
 
 
