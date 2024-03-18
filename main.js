@@ -193,7 +193,7 @@ const newPolygonLayer = leaflet.geoJSON(bairroPrinc, {
 const setZoom = Math.floor(Math.random() * 5) + 11;
 const mymap = leaflet
   .map("mapid")
-  .setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), setZoom);
+  .setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), 25);
 newPolygonLayer.addTo(mymap);
 
 //Declarando variáveis para o jogo
