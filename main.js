@@ -309,34 +309,37 @@ const botaoRegioes = L.Control.extend({
     container.innerHTML =
       '<button id="botaoRegioes" class="botao-regioes">Mostrar Regiões <span>(modo fácil)</span></button>';
 
-    let modoFacilAtivo = false; // Variável para rastrear o estado do modo fácil
-    const mymap = map; // Supondo que 'mymap' é a variável do seu mapa
+    let modoFacilAtivo = false;
+    const mymap = map;
+    let contornos = []; // Armazena as camadas adicionadas
+
+ 
 
     container.onclick = function () {
       if (!modoFacilAtivo) {
+        // Adiciona os contornos ao mapa e guarda as referências
         regioesData.features.forEach(function (regiao) {
           var contorno = L.geoJSON(regiao, {
+
             style: function (feature) {
               return { color: feature.properties.color };
             },
+
             onEachFeature: function (feature, layer) {
               layer.bindPopup(feature.properties.subprefeitura);
             },
           });
-
           contorno.addTo(mymap);
+          contornos.push(contorno); // Armazena a camada adicionada
         });
 
         document.getElementById("botaoRegioes").innerHTML =
           "Ocultar Regiões <span>(modo normal)</span>";
         modoFacilAtivo = true;
       } else {
-        mymap.eachLayer(function (layer) {
-          if (!true) {
-            //corrigir a condição para saber qual é a layer referente ao contorno original
-            mymap.removeLayer(layer);
-          }
-        });
+        // Remove todas as camadas armazenadas
+        contornos.forEach((contorno) => mymap.removeLayer(contorno));
+        contornos = []; // Limpa o array
 
         document.getElementById("botaoRegioes").innerHTML =
           "Mostrar Regiões <span>(modo fácil)</span>";
@@ -345,7 +348,7 @@ const botaoRegioes = L.Control.extend({
     };
 
     return container;
-  },
+  },  
 });
 
 mymap.addControl(new botaoRegioes());

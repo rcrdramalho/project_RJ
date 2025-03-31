@@ -1,3 +1,44 @@
+#head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #020617;
+  border-bottom: 2px solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+#head img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#head h1 {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+#ajuda-btn {
+  margin-left: 27%;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none; /* Remove a borda */
+  border-radius: 5px; /* Adiciona bordas arredondadas */
+  background-color: #4caf50; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  cursor: pointer;
+  transition: background-color 0.3s; /* Adiciona uma transição suave */
+}
+
+#ajuda-btn:hover {
+  background-color: #45a049; /* Muda a cor de fundo ao passar o mouse */
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
@@ -6,7 +47,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: rgb(15, 11, 32); /* Define o fundo preto */
+  background-color: #020617; /* Define o fundo preto */
   color: white; /* Define as letras brancas */
 }
 
@@ -32,8 +73,9 @@ body {
 #mapa {
   border: 1px solid #ddd;
   max-width: 100%; /* Largura máxima relativa */
-  width: 800px; /* Largura fixa para telas grandes */
-  height: 300px;
+  width: 600px; /* Largura fixa para telas grandes */
+  max-height: 100%;
+  height: 400px;
 }
 
 #mapid {
@@ -198,19 +240,4 @@ body {
 .botao-regioes span {
   display: block;
   font-size: 16px;
-}
-
-#github-link img {
-  width: 80px;
-  height: auto;
-}
-
-.visually-hidden {
-  display: none;
-}
-
-.github-icon {
-  position: absolute;
-  right: 0;
-  top: 0;
 }
