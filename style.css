@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   padding: 10px 20px;
-  background-color: #020617;
+  background-color: #020c38;
   border-bottom: 2px solid #ddd;
   position: fixed;
   top: 0;
@@ -24,7 +24,7 @@
 }
 
 #ajuda-btn {
-  margin-left: 27%;
+  margin-left: 20%;
   padding: 10px 20px;
   font-size: 16px;
   border: none; /* Remove a borda */
@@ -36,7 +36,7 @@
 }
 
 #ajuda-btn:hover {
-  background-color: #45a049; /* Muda a cor de fundo ao passar o mouse */
+  background-color: #3a803d;; /* Muda a cor de fundo ao passar o mouse */
 }
 
 body {
@@ -47,7 +47,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #020617; /* Define o fundo preto */
+  background-color: #0a1231; /* Define o fundo preto */
   color: white; /* Define as letras brancas */
 }
 
@@ -119,15 +119,7 @@ body {
 }
 
 #enviar-btn:hover {
-  background-color: #45a049; /* Muda a cor de fundo ao passar o mouse */
-}
-
-#resultado {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  max-height: 200px; /* Defina uma altura máxima para a lista */
-  overflow-y: auto; /* Adicione uma barra de rolagem vertical conforme necessário */
+  background-color: #3a803d;/* Muda a cor de fundo ao passar o mouse */
 }
 
 .awesomplete {
@@ -156,10 +148,9 @@ body {
   box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
   text-shadow: none;
   max-height: 200px; /* Defina uma altura máxima para a lista */
-  overflow-y: auto; /* Adicione uma barra de rolagem vertical conforme necessário */
+  overflow-y: auto; 
 }
 
-/* Restante do seu CSS continua aqui */
 
 .awesomplete > ul[hidden],
 .awesomplete > ul:empty {
@@ -213,11 +204,10 @@ body {
 }
 
 #resultado {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  max-height: 200px; /* Defina uma altura máxima para a lista */
-  overflow-y: auto; /* Adicione uma barra de rolagem vertical conforme necessário */
+  width: 50%;
+  height: 110px;
+  overflow-y: auto;
+  text-align: left;
 }
 
 .botao-regioes {
@@ -227,17 +217,74 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
 .botao-regioes:hover {
-  background-color: #45a049;
+  background-color: #3a803d;
 }
 
-.botao-regioes span {
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#modal {
+  background: #0a1231;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+}
+
+#fechar-btn {
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
   display: block;
-  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#fechar-btn:hover{
+  background-color: #3a803d;
+}
+
+#overlay.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s ease-out;
+}
+
+#overlay {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+@media (max-width: 768px) {
+  #mapa {
+    width: 90%; /* Reduz a largura para caber melhor */
+    height: 350px; /* Ajusta a altura */
+    margin: 10px auto; /* Centraliza horizontalmente */
+  }
 }

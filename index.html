@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" type="image/png" href="icon.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BairroGuessr</title>
@@ -14,11 +15,10 @@
     <div id="head">
       <img src="icon.png" alt="Logo do BairroGuessr" /> 
       <h1>BairroGuessr</h1>
-      <button id="ajuda-btn">ajuda</button>
+      <button id="ajuda-btn">Como jogar</button>
     </div>
     <div id="app">
       <h2>Qual o bairro de hoje?</h2>
-      <p>Chute um bairro e use o mapa para melhorar suas tentativas</p>
       <div id="mapa">
         <div id="mapid"></div>
       </div>
@@ -40,4 +40,16 @@
     <script type="module" src="/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
   </body>
+  <div id="overlay" class="hidden">
+    <div id="modal">
+      <h2>Como Jogar</h2>
+      <p>O objetivo do jogo é adivinhar o bairro do dia.</p>
+      <p>Chute um bairro para começar e use o mapa para ver a distância entre o bairro que você chutou e o bairro do dia.</p>
+      <p>Digite um bairro que você acha estar mais próximo e observe a distância de novo.</p>
+      <p>Continue assim até acertar!</p>
+      <p>As cores dos bairros no mapa indicam a distância para o bairro do dia, quanto mais verde mais próximo.</p>
+      <p>O botão de Mostrar Regiões mostra o mapa do Rio de Janeiro (lembrando que são apenas bairros da cidade do Rio).</p>
+      <button id="fechar-btn">Entendi</button>
+    </div>
+  </div>
 </html>

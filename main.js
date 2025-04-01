@@ -266,7 +266,7 @@ function mostrarBairrosDigitados() {
   resultado.innerHTML = "<h2></h2>";
 
   if (acertou) {
-    resultado.innerHTML += `<h1>Bairro correto!! - ${bairrocerto}</h1>`;
+    resultado.innerHTML += `<h3>Bairro correto! - ${bairrocerto}</h3>\n<p>Todo dia o bairro muda. Volte amanhã para o próximo bairro!</p>`;
   } else {
     if (bairrosDigitados.length === 0) {
       resultado.innerHTML += "<p>Nenhum bairro digitado.</p>";
@@ -307,7 +307,7 @@ const botaoRegioes = L.Control.extend({
   onAdd: function (map) {
     const container = L.DomUtil.create("div", "leaflet-bar leaflet-control");
     container.innerHTML =
-      '<button id="botaoRegioes" class="botao-regioes">Mostrar Regiões <span>(modo fácil)</span></button>';
+      '<button id="botaoRegioes" class="botao-regioes">Mostrar Regiões</button>';
 
     let modoFacilAtivo = false;
     const mymap = map;
@@ -334,7 +334,7 @@ const botaoRegioes = L.Control.extend({
         });
 
         document.getElementById("botaoRegioes").innerHTML =
-          "Ocultar Regiões <span>(modo normal)</span>";
+          "Ocultar Regiões";
         modoFacilAtivo = true;
       } else {
         // Remove todas as camadas armazenadas
@@ -342,7 +342,7 @@ const botaoRegioes = L.Control.extend({
         contornos = []; // Limpa o array
 
         document.getElementById("botaoRegioes").innerHTML =
-          "Mostrar Regiões <span>(modo fácil)</span>";
+          "Mostrar Regiões";
         modoFacilAtivo = false;
       }
     };
@@ -352,3 +352,17 @@ const botaoRegioes = L.Control.extend({
 });
 
 mymap.addControl(new botaoRegioes());
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("ajuda-btn").addEventListener("click", function () {
+    document.getElementById("overlay").classList.remove("hidden");
+  });
+
+  document.getElementById("fechar-btn").addEventListener("click", function () {
+    document.getElementById("overlay").classList.add("hidden");
+  });
+});
+
+mymap.setMinZoom(9); // Define um zoom mínimo seguro
+mymap.setMaxZoom(14); // Define um zoom máximo permitido
+mymap.setMaxBounds(mymap.getBounds()); // Impede que os jogadores naveguem para fora do mapa
