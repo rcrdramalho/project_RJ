@@ -103,7 +103,7 @@ body {
 }
 
 #painel-jogo {
-  height: 300px;
+  height: 200px;
   margin-top: 20px;
   width: 600px;
   max-width: 100%;
@@ -123,8 +123,6 @@ body {
 
 #bairro-input {
   height: 35px;
-  width: 300px;
-  max-width: 80%;
   font-size: 16px;
   border: none;
   border-radius: 5px;
