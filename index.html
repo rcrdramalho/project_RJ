@@ -13,9 +13,13 @@
   </head>
   <body>
     <div id="head">
-      <img src="icon.png" alt="Logo do BairroGuessr" /> 
-      <h1>BairroGuessr</h1>
-      <button id="ajuda-btn">Como jogar</button>
+      <div id="head-painel">
+        <div id="title">
+          <img src="icon.png" alt="Logo do BairroGuessr" /> 
+          <h1>BairroGuessr</h1>
+        </div>
+        <button id="ajuda-btn">Como jogar</button>
+      </div>
     </div>
     <div id="app">
       <h2>Qual o bairro de hoje?</h2>
@@ -23,14 +27,14 @@
         <div id="mapid"></div>
       </div>
       <div id="painel-jogo">
-        <div>
+        <div id="painel-enviar">
           <input
             type="text"
             id="bairro-input"
             class="awesomplete"
             placeholder="Digite um bairro"
             data-list=""
-            autocomplete="off"
+            autocomplete="on"
           />
           <button id="enviar-btn">Enviar</button>
         </div>
