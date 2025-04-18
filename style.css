@@ -147,6 +147,10 @@ body {
   background-color: #3a803d;
 }
 
+.visually-hidden {
+  display: none;
+}
+
 .awesomplete {
   display: inline-block;
   position: relative;
