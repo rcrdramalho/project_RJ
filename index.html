@@ -41,6 +41,12 @@
         <div id="resultado"></div>
       </div>
     </div>
+    <div id="celebration" class="celebration-overlay">
+      <div class="celebration-message">
+      <h2>Parabéns</h2>
+      <p>O bairro de hoje é: <span id="bairro-acertado"></span></p>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.2/awesomplete.min.js"></script>
   </body>
@@ -48,12 +54,13 @@
     <div id="modal">
       <h2>Como Jogar</h2>
       <p>O objetivo do jogo é adivinhar o bairro do dia.</p>
-      <p>Chute um bairro para começar e use o mapa para ver a distância entre o bairro que você chutou e o bairro do dia.</p>
-      <p>Digite um bairro que você acha estar mais próximo e observe a distância de novo.</p>
-      <p>Continue assim até acertar!</p>
-      <p>As cores dos bairros no mapa indicam a distância para o bairro do dia, quanto mais verde mais próximo.</p>
-      <p>O botão de Mostrar Regiões mostra o mapa do Rio de Janeiro (lembrando que são apenas bairros da cidade do Rio).</p>
+      <p>Para começar, digite o nome de um bairro. O mapa mostrará a distância entre o bairro escolhido e o bairro correto.</p>
+      <p>Com base nessa dica, tente outro bairro que você acha estar mais próximo. Acompanhe a distância novamente.</p>
+      <p>Continue chutando até acertar!</p>
+      <p>O botão <strong>Mostrar Regiões</strong> exibe o mapa da cidade do Rio de Janeiro (lembrando que os bairros possíveis são apenas da cidade do Rio).</p>
+      <p>Adicione este site à tela inicial do seu celular para voltar outros dias. Essa opção deve estar disponível no menu do seu navegador.</p>
       <button id="fechar-btn">Entendi</button>
+
     </div>
   </div>
 </html>
