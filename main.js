@@ -204,8 +204,19 @@ const bairrosDigitados = [];
 
 //Construindo sugestões
 document.addEventListener("DOMContentLoaded", function () {
+  // Função para normalizar texto (remover acentos)
+  function normalizeString(string) {
+    return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  // Configure o Awesomplete com um filtro personalizado
   new Awesomplete(document.querySelector("#bairro-input"), {
     list: nomesBairros,
+    filter: function(text, input) {
+      // Normaliza tanto o texto da lista quanto o input do usuário
+      return normalizeString(text).toLowerCase().indexOf(
+        normalizeString(input.toLowerCase())) !== -1;
+    }
   });
 });
 const input = document.getElementById("bairro-input");
