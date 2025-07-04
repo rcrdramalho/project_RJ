@@ -179,8 +179,9 @@ const dataAtual = new Date();
 const seedR = parseInt(
   dataAtual.getDate().toString() +
     dataAtual.getMonth().toString() +
-    dataAtual.getFullYear().toString()
-);
+    dataAtual.getFullYear().toString() +
+    dataAtual.getSeconds().toString()
+); //comentar o get seconds
 const bairroPrincIndex = (seedR ^ 2) % bairrosData.features.length;
 const bairroPrinc = bairrosData.features[bairroPrincIndex];
 
