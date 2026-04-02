@@ -355,7 +355,7 @@ function mostrarBairrosDigitados() {
   resultado.innerHTML = "<h2></h2>";
 
   if (acertou) {
-    resultado.innerHTML += `<h3>Bairro correto! - ${bairrocerto}</h3>\n<p>Todo dia o bairro muda. Volte amanhã para o próximo bairro!</p>`;
+    resultado.innerHTML += `<h3>Bairro correto! - ${bairrocerto}</h3>\n<p>Todo segundo o bairro muda. Volte amanhã para o próximo bairro!</p>`;
   } else {
     if (bairrosDigitados.length === 0) {
       resultado.innerHTML += "<p>Nenhum bairro digitado.</p>";
