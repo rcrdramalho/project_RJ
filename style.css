@@ -88,6 +88,11 @@ body {
   margin-bottom: 10px;
 }
 
+#status-jogo {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 #mapa {
   max-width: 100%;
   width: 600px; 
