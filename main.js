@@ -202,6 +202,7 @@ var acertou = false;
 var bairrocerto = "";
 let textoDigitado = "";
 const bairrosDigitados = [];
+let tentativas = 0;
 
 //Construindo sugestões
 document.addEventListener("DOMContentLoaded", function () {
@@ -222,14 +223,25 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 const input = document.getElementById("bairro-input");
 const button = document.getElementById("enviar-btn");
+const tentativasCount = document.getElementById("tentativas-count");
+
+function atualizarTentativas() {
+  tentativasCount.textContent = tentativas;
+}
 
 //Tentativas
 // Modifique a parte onde você desenha o bairro chutado (dentro do event listener do botão "enviar")
-button.addEventListener("click", function () {
-  textoDigitado = input.value;
+function processarTentativa() {
+  textoDigitado = input.value.trim();
+
+  if (!textoDigitado) {
+    return;
+  }
 
   bairrosData.features.forEach(function (feature) {
     if (feature.properties.nome.toLowerCase() === textoDigitado.toLowerCase()) {
+      tentativas += 1;
+      atualizarTentativas();
       // Código existente...
       const centroid1 = turf.centroid(bairroPrinc).geometry.coordinates;
       const centroid2 = turf.centroid(feature).geometry.coordinates;
@@ -308,6 +320,14 @@ button.addEventListener("click", function () {
       return;
     }
   });
+}
+
+button.addEventListener("click", processarTentativa);
+
+input.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    processarTentativa();
+  }
 });
 
 // Função para inicializar a celebração (adicione esta função ao seu código)
@@ -347,6 +367,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Inicializa a celebração
   inicializarCelebracao();
+  atualizarTentativas();
 });
 
 // Função para mostrar a lista de bairros digitados
