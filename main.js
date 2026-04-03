@@ -224,9 +224,37 @@ document.addEventListener("DOMContentLoaded", function () {
 const input = document.getElementById("bairro-input");
 const button = document.getElementById("enviar-btn");
 const tentativasCount = document.getElementById("tentativas-count");
+const melhorPalpite = document.getElementById("melhor-palpite");
 
 function atualizarTentativas() {
   tentativasCount.textContent = tentativas;
+}
+
+function obterDirecao(centroidOrigem, centroidDestino) {
+  const [origemLng, origemLat] = centroidOrigem;
+  const [destinoLng, destinoLat] = centroidDestino;
+  const partes = [];
+
+  if (Math.abs(destinoLat - origemLat) > 0.01) {
+    partes.push(destinoLat > origemLat ? "norte" : "sul");
+  }
+
+  if (Math.abs(destinoLng - origemLng) > 0.01) {
+    partes.push(destinoLng > origemLng ? "leste" : "oeste");
+  }
+
+  return partes.length === 0 ? "muito perto" : partes.join("-");
+}
+
+function atualizarMelhorPalpite() {
+  if (bairrosDigitados.length === 0) {
+    melhorPalpite.textContent = "Melhor palpite: nenhum ainda";
+    return;
+  }
+
+  const melhor = bairrosDigitados[0];
+  melhorPalpite.textContent =
+    `Melhor palpite: ${melhor.nome} (${melhor.distancia.toFixed(2)} km)`;
 }
 
 //Tentativas
@@ -248,13 +276,16 @@ function processarTentativa() {
       const distance = turf.distance(centroid1, centroid2, {
         units: "kilometers",
       });
+      const direcao = obterDirecao(centroid2, centroid1);
 
       bairrosDigitados.push({
         nome: feature.properties.nome,
         distancia: distance,
+        direcao: direcao,
         feature: feature
       });
       bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
+      atualizarMelhorPalpite();
 
       // Quando for o bairro correto
       if (feature == bairroPrinc) {
@@ -368,6 +399,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Inicializa a celebração
   inicializarCelebracao();
   atualizarTentativas();
+  atualizarMelhorPalpite();
 });
 
 // Função para mostrar a lista de bairros digitados
@@ -385,7 +417,7 @@ function mostrarBairrosDigitados() {
       bairrosDigitados.forEach(function (bairro) {
         resultado.innerHTML += `<li>${bairro.nome}: ${bairro.distancia.toFixed(
           2
-        )} km</li>`;
+        )} km, direção: ${bairro.direcao}</li>`;
       });
       resultado.innerHTML += "</ul>";
     }
