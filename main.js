@@ -280,8 +280,8 @@ function processarTentativa() {
       bairrosDigitados.push({
         nome: feature.properties.nome,
         distancia: distance,
-        direcao: direcao,
-        feature: feature
+        direcao,
+        feature
       });
       bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
       atualizarMelhorPalpite();
