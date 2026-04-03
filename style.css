@@ -93,6 +93,12 @@ body {
   font-weight: 600;
 }
 
+#melhor-palpite {
+  font-size: 16px;
+  color: #c9d6ff;
+  margin-top: 0;
+}
+
 #mapa {
   max-width: 100%;
   width: 600px; 
