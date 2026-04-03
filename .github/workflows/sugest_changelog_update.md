@@ -1,82 +1,105 @@
-# Changelog
+---
+name: update-changelog-if-needed
+on:
+  pull_request:
+    types: [opened, synchronize]
 
-All notable changes to this project will be documented in this file.
+permissions:
+    contents: read
+    pull-requests: read
+    
+safe-outputs:
+  add-comment:
+    hide-older-comments: true
+    allowed-reasons: [outdated]
+  noop:
+    report-as-issue: false
+    
+tools:
+  github:
+    toolsets: [repos, pull_requests]
+engine: copilot
+---
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+# Goal
+Analyze the pull request diff and update CHANGELOG.md if the changes affect user-facing behavior, setup, or maintenance. A changelog must be a curated, chronologically ordered list of notable changes for each version of the project.
 
-## [Unreleased]
+# Steps
 
-### Added
+## 1. Gather Context
+- Retrieve the pull request title, description, and diff.
+- Identify:
+  - Files changed
+  - Nature of changes (new features, functionality changes, bug fixes, security)
 
-- Added an on-screen attempt counter during gameplay.
-- Added support for submitting guesses with the `Enter` key.
-- Added a structured project README with setup and gameplay guidance.
+## 2. Classify Changes
+Determine what PR changes can be classified in the following types:
+- Added: for new features.
+- Changed: for changes in existing functionality.
+- Deprecated: for soon-to-be removed features.
+- Removed: for removed features.
+- Fixed: for any bug fixes.
+- Security: in case of vulnerabilities.
 
-### Changed
+If NONE of the above → Do nothing
+Do not update the changelog for internal-only changes with no user-facing impact, such as CI updates, internal refactors, tests, automation changes, or technical renames.
 
-- Improved the gameplay flow by making guess submission and progress feedback more explicit.
+## 3. Read previous Change Log
+- Open CHANGELOG.md
+- Identify version patterns:
+  - Date format
+  - md file structure
+  - Version control labels
 
-## [2025-07-04]
+## 4. Decide Action
 
-### Changed
+### Case A — No Update Needed
+- DO NOT DO ANYTHING. STOP!
 
-- Updated the main game logic in `main.js`.
+### Case B — Update Needed
+- Proceed to suggest a changelog update with the incoming changes.
 
-## [2025-04-22]
+## 5. Generate Suggested Changes
 
-### Added
+Create a minimal patch that:
 
-- Added accent-insensitive neighborhood search to make guesses easier to type and find.
+- Preserves tone and structure
+- Matches existing formatting and next version number
+- Adds changes above the latest change version
+- Avoids duplication
 
-## [2025-04-19]
+Format according to changelog guidelines (adapt to project pattern):
 
-### Changed
+```
+## [x.x.x] - yyyy-mm-dd
+### type of change (Added, Changed, Deprecated, Removed, Fixed, Security)
+- change1
+- change2
 
-- Updated the project icon asset to the current `icon.png`.
+### type of change...
+```
 
-## [2025-04-18]
+## 7. Post Suggestion for Human Review
 
-### Added
+Create a PR comment with:
 
-- Added gameplay feedback improvements to the interface.
+Structure:
 
-### Changed
+- Title - "### ✏️ Suggested Changelog Update (Review Required)"
+- Summary
+    - Why Changelog needs updating
+    - What changed in the PR that triggered it
+- Proposed Patch
+    - Include the diff block
+- Explicit Review Request - "Please review and apply this change if it looks correct."
 
-- Refined the visual and interactive experience across the main HTML, CSS, and JavaScript files.
+# Guardrails
+- Never hallucinate features not present in diff
+- Do not remove unrelated content from previous changes
+- Keep edits minimal and precise
+- If uncertain → ask for human review instead of editing
 
-## [2025-04-01]
-
-### Changed
-
-- Finalized the desktop version of the interface.
-- Improved layout positioning.
-- Improved mobile responsiveness.
-
-## [2025-03-31]
-
-### Changed
-
-- Continued the second development phase of the game.
-
-## [2024-06-12]
-
-### Added
-
-- Added the first project README file.
-
-## [2024-03-18]
-
-### Fixed
-
-- Fixed issues related to correct neighborhood handling in the core game logic.
-
-## [2024-03-16]
-
-### Added
-
-- Initial project structure.
-- First playable versions of the HTML, CSS, JavaScript, and geographic data files.
-
-### Changed
-
-- Iterated on the initial gameplay implementation through several early commits.
+# Output
+- Either:
+  - No-op + explanation
+  - OR a patch to CHANGELOG.md + explanation comment
