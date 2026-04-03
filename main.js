@@ -191,7 +191,6 @@ const newPolygonLayer = leaflet.geoJSON(bairroPrinc, {
     return { color: "black", fillColor: "black", fillOpacity: 100 };
   },
 });
-const setZoom = Math.floor(Math.random() * 5) + 11;
 const mymap = leaflet
   .map("mapid")
   .setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), 10);
@@ -281,8 +280,8 @@ function processarTentativa() {
       bairrosDigitados.push({
         nome: feature.properties.nome,
         distancia: distance,
-        direcao: direcao,
-        feature: feature
+        direcao,
+        feature
       });
       bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
       atualizarMelhorPalpite();
