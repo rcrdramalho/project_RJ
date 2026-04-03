@@ -1,92 +1,82 @@
 # Changelog
 
-Todas as mudanças relevantes deste projeto estão resumidas aqui com base no histórico de commits.
+All notable changes to this project will be documented in this file.
 
-O formato segue uma linha do tempo simples, organizada por fases do projeto.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
 ### Added
 
-- Contador de tentativas exibido na interface do jogo.
-- Suporte para enviar palpites pressionando `Enter`.
-- Novo `README.md` com instruções de execução, mecânica do jogo e recursos principais.
+- Added an on-screen attempt counter during gameplay.
+- Added support for submitting guesses with the `Enter` key.
+- Added a structured project README with setup and gameplay guidance.
 
 ### Changed
 
-- Ajustes na experiência de uso para tornar as ações do jogador mais visíveis e documentadas.
+- Improved the gameplay flow by making guess submission and progress feedback more explicit.
 
-## [2026-04-02] - Automação e CI
+## [2025-07-04]
+
+### Changed
+
+- Updated the main game logic in `main.js`.
+
+## [2025-04-22]
 
 ### Added
 
-- Workflow inicial de CI com GitHub Actions para instalar dependências e gerar build do projeto.
-- Arquivos de suporte para automação de sugestão de README via `gh-aw`.
+- Added accent-insensitive neighborhood search to make guesses easier to type and find.
+
+## [2025-04-19]
+
+### Changed
+
+- Updated the project icon asset to the current `icon.png`.
+
+## [2025-04-18]
+
+### Added
+
+- Added gameplay feedback improvements to the interface.
+
+### Changed
+
+- Refined the visual and interactive experience across the main HTML, CSS, and JavaScript files.
+
+## [2025-04-01]
+
+### Changed
+
+- Finalized the desktop version of the interface.
+- Improved layout positioning.
+- Improved mobile responsiveness.
+
+## [2025-03-31]
+
+### Changed
+
+- Continued the second development phase of the game.
+
+## [2024-06-12]
+
+### Added
+
+- Added the first project README file.
+
+## [2024-03-18]
 
 ### Fixed
 
-- Correção de indentação no workflow YAML para permitir a execução do Actions.
+- Fixed issues related to correct neighborhood handling in the core game logic.
 
-### Notes
-
-- Esta fase também inclui commits experimentais de validação da automação agentic no repositório.
-
-## [2025-07-04] - Ajustes de lógica do jogo
-
-### Changed
-
-- Atualizações na lógica principal em `main.js`, expandindo o comportamento do jogo após as melhorias de interface e feedback.
-
-## [2025-04-22] - Busca com acentuação flexível
+## [2024-03-16]
 
 ### Added
 
-- Suporte para ignorar acentuação ao buscar bairros no campo de entrada, melhorando a usabilidade do autocomplete.
-
-## [2025-04-19] - Identidade visual
-
-### Changed
-
-- Atualização do ícone do projeto, incluindo upload do novo asset e renomeação para `icon.png`.
-
-## [2025-04-18] - Feedback visual da partida
-
-### Added
-
-- Melhorias de feedback visual para o jogador durante a partida.
+- Initial project structure.
+- First playable versions of the HTML, CSS, JavaScript, and geographic data files.
 
 ### Changed
 
-- Ajustes em `index.html`, `main.js` e `style.css` para reforçar estados do jogo e acabamento visual.
-
-## [2025-04-01] - Consolidação da interface
-
-### Changed
-
-- Versão final para desktop.
-- Ajustes de posicionamento da interface.
-- Melhorias de responsividade para celular.
-
-## [2025-03-31] - Evolução diária do projeto
-
-### Changed
-
-- Continuidade do desenvolvimento da segunda fase do jogo, registrada no commit `dia 2`.
-
-## [2024-06-12] - Documentação inicial
-
-### Added
-
-- Criação do arquivo `ReadMe` com a descrição inicial do projeto.
-
-## [2024-03-16] a [2024-03-18] - Primeira implementação
-
-### Added
-
-- Estrutura inicial do jogo.
-- Primeiras versões de `index.html`, `main.js`, `style.css` e dados geográficos do projeto.
-
-### Changed
-
-- Série de commits incrementais refinando a lógica principal até a primeira versão jogável.
-- Correções para exibição do bairro correto e ajustes gerais de funcionamento.
+- Iterated on the initial gameplay implementation through several early commits.
