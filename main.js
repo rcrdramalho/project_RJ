@@ -191,7 +191,6 @@ const newPolygonLayer = leaflet.geoJSON(bairroPrinc, {
     return { color: "black", fillColor: "black", fillOpacity: 100 };
   },
 });
-const setZoom = Math.floor(Math.random() * 5) + 11;
 const mymap = leaflet
   .map("mapid")
   .setView(turf.centroid(bairroPrinc).geometry.coordinates.reverse(), 10);
