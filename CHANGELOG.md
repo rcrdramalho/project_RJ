@@ -4,37 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [2.0.0] 2026-04-06
 
 ### Added
 
-- Added an on-screen attempt counter during gameplay.
-- Added support for submitting guesses with the `Enter` key.
-- Added a structured project README with setup and gameplay guidance.
+- Attempt counter displayed in the game interface.
+- Support for submitting guesses by pressing `Enter`.
+- Direction indicator (north/south/east/west) to help guide the next guess.
+- Summary of the best guess so far displayed in the interface.
 
 ### Changed
 
-- Improved the gameplay flow by making guess submission and progress feedback more explicit.
+- Usability improvements to make player actions more visible and better documented.
+- The list of submitted neighborhoods now also shows the approximate direction for each guess.
 
-## [2025-07-04]
+## [1.5.1] 2025-07-04
 
 ### Changed
 
-- Updated the main game logic in `main.js`.
+- Updated the main game logic.
 
-## [2025-04-22]
+## [1.5.0] 2025-04-22
 
 ### Added
 
 - Added accent-insensitive neighborhood search to make guesses easier to type and find.
 
-## [2025-04-19]
-
-### Changed
-
-- Updated the project icon asset to the current `icon.png`.
-
-## [2025-04-18]
+## [1.0.1] 2025-04-18
 
 ### Added
 
@@ -44,7 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Refined the visual and interactive experience across the main HTML, CSS, and JavaScript files.
 
-## [2025-04-01]
+## [1.0.0] 2025-04-01
 
 ### Changed
 
@@ -52,25 +48,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Improved layout positioning.
 - Improved mobile responsiveness.
 
-## [2025-03-31]
+## [0.0.2] 2025-03-31
 
 ### Changed
 
 - Continued the second development phase of the game.
 
-## [2024-06-12]
-
-### Added
-
-- Added the first project README file.
-
-## [2024-03-18]
+## [0.0.1] 2024-03-18
 
 ### Fixed
 
 - Fixed issues related to correct neighborhood handling in the core game logic.
 
-## [2024-03-16]
+## [0.0.0] 2024-03-16
 
 ### Added
 
