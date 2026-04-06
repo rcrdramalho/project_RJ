@@ -42,7 +42,7 @@ Determine what PR changes can be classified in the following types:
 - Security: in case of vulnerabilities.
 
 If NONE of the above → Do nothing
-Do not update the changelog for internal-only changes with no user-facing impact, such as CI updates, internal refactors, tests, automation changes, or technical renames.
+Do not update the changelog for internal-only changes with no user-facing impact, such as CI updates, internal refactors, tests, automation changes, documentation/specification or technical renames.
 
 ## 3. Read previous Change Log
 - Open CHANGELOG.md
@@ -64,14 +64,14 @@ Do not update the changelog for internal-only changes with no user-facing impact
 Create a minimal patch that:
 
 - Preserves tone and structure
-- Matches existing formatting and next version number
-- Adds changes above the latest change version
+- Matches existing formatting
+- Avoid being too general
 - Avoids duplication
 
 Format according to changelog guidelines (adapt to project pattern):
 
 ```
-## [x.x.x] - yyyy-mm-dd
+## [version]
 ### type of change (Added, Changed, Deprecated, Removed, Fixed, Security)
 - change1
 - change2
