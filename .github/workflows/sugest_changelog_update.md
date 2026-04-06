@@ -64,7 +64,7 @@ Do not update the changelog for internal-only changes with no user-facing impact
 Create a minimal patch that:
 
 - Preserves tone and structure
-- Matches existing formatting
+- Matches existing formatting and language
 - Avoid being too general
 - Avoids duplication
 
