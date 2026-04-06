@@ -179,9 +179,8 @@ const dataAtual = new Date();
 const seedR = parseInt(
   dataAtual.getDate().toString() +
     dataAtual.getMonth().toString() +
-    dataAtual.getFullYear().toString() +
-    dataAtual.getSeconds().toString()
-); //comentar o get seconds
+    dataAtual.getFullYear().toString()
+);
 const bairroPrincIndex = (seedR ^ 2) % bairrosData.features.length;
 const bairroPrinc = bairrosData.features[bairroPrincIndex];
 
@@ -203,13 +202,12 @@ let textoDigitado = "";
 const bairrosDigitados = [];
 let tentativas = 0;
 
+function normalizeString(string) {
+  return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 //Construindo sugestões
 document.addEventListener("DOMContentLoaded", function () {
-  // Função para normalizar texto (remover acentos)
-  function normalizeString(string) {
-    return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  }
-
   // Configure o Awesomplete com um filtro personalizado
   new Awesomplete(document.querySelector("#bairro-input"), {
     list: nomesBairros,
@@ -256,6 +254,32 @@ function atualizarMelhorPalpite() {
     `Melhor palpite: ${melhor.nome} (${melhor.distancia.toFixed(2)} km)`;
 }
 
+function criarPopupBairro(nome, descricao) {
+  const wrapper = document.createElement("div");
+  const titulo = document.createElement("strong");
+  titulo.textContent = nome;
+  wrapper.appendChild(titulo);
+
+  if (descricao) {
+    wrapper.appendChild(document.createElement("br"));
+    wrapper.appendChild(document.createTextNode(descricao));
+  }
+
+  return wrapper;
+}
+
+function limparResultado() {
+  const resultado = document.getElementById("resultado");
+  resultado.replaceChildren();
+  return resultado;
+}
+
+function adicionarMensagemResultado(resultado, tag, texto) {
+  const element = document.createElement(tag);
+  element.textContent = texto;
+  resultado.appendChild(element);
+}
+
 //Tentativas
 // Modifique a parte onde você desenha o bairro chutado (dentro do event listener do botão "enviar")
 function processarTentativa() {
@@ -265,8 +289,12 @@ function processarTentativa() {
     return;
   }
 
+  const bairroNormalizado = normalizeString(textoDigitado).toLowerCase();
+  let bairroEncontrado = false;
+
   bairrosData.features.forEach(function (feature) {
-    if (feature.properties.nome.toLowerCase() === textoDigitado.toLowerCase()) {
+    if (normalizeString(feature.properties.nome).toLowerCase() === bairroNormalizado) {
+      bairroEncontrado = true;
       tentativas += 1;
       atualizarTentativas();
       // Código existente...
@@ -301,7 +329,7 @@ function processarTentativa() {
             };
           },
           onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.nome);
+            layer.bindPopup(criarPopupBairro(feature.properties.nome));
             layer.on('click', function() {
               layer.openPopup();
             });
@@ -336,7 +364,7 @@ function processarTentativa() {
             return { color: "gray", fillColor: fillColor, fillOpacity: 100 };
           },
           onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.nome);
+            layer.bindPopup(criarPopupBairro(feature.properties.nome));
             layer.on('click', function() {
               layer.openPopup();
             });
@@ -350,6 +378,15 @@ function processarTentativa() {
       return;
     }
   });
+
+  if (!bairroEncontrado) {
+    const resultado = limparResultado();
+    adicionarMensagemResultado(
+      resultado,
+      "p",
+      "Bairro inválido. Escolha um bairro listado nas sugestões."
+    );
+  }
 }
 
 button.addEventListener("click", processarTentativa);
@@ -403,22 +440,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Função para mostrar a lista de bairros digitados
 function mostrarBairrosDigitados() {
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = "<h2></h2>";
+  const resultado = limparResultado();
 
   if (acertou) {
-    resultado.innerHTML += `<h3>Bairro correto! - ${bairrocerto}</h3>\n<p>Todo segundo o bairro muda. Volte amanhã para o próximo bairro!</p>`;
+    adicionarMensagemResultado(resultado, "h3", `Bairro correto! - ${bairrocerto}`);
+    adicionarMensagemResultado(
+      resultado,
+      "p",
+      "Todo dia o bairro muda. Volte amanhã para o próximo bairro!"
+    );
   } else {
     if (bairrosDigitados.length === 0) {
-      resultado.innerHTML += "<p>Nenhum bairro digitado.</p>";
+      adicionarMensagemResultado(resultado, "p", "Nenhum bairro digitado.");
     } else {
-      resultado.innerHTML += "<ul>";
+      const lista = document.createElement("ul");
       bairrosDigitados.forEach(function (bairro) {
-        resultado.innerHTML += `<li>${bairro.nome}: ${bairro.distancia.toFixed(
+        const item = document.createElement("li");
+        item.textContent = `${bairro.nome}: ${bairro.distancia.toFixed(
           2
-        )} km, direção: ${bairro.direcao}</li>`;
+        )} km, direção: ${bairro.direcao}`;
+        lista.appendChild(item);
       });
-      resultado.innerHTML += "</ul>";
+      resultado.appendChild(lista);
     }
   }
 }
@@ -494,101 +537,9 @@ const botaoRegioes = L.Control.extend({
 
 mymap.addControl(new botaoRegioes());
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("ajuda-btn").addEventListener("click", function () {
-    document.getElementById("overlay").classList.remove("hidden");
-  });
-
-  document.getElementById("fechar-btn").addEventListener("click", function () {
-    document.getElementById("overlay").classList.add("hidden");
-  });
-});
-
 mymap.setMinZoom(9); // Define um zoom mínimo seguro
 mymap.setMaxZoom(14); // Define um zoom máximo permitido
 mymap.setMaxBounds(mymap.getBounds()); // Impede que os jogadores naveguem para fora do mapa
-
-const botaoDesistir = L.Control.extend({
-  options: {
-    position: 'topright'
-  },
-
-  onAdd: function(map) {
-    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    container.innerHTML = '<button id="botaoDesistir" class="botao-desistir">Desistir</button>';
-    
-    container.onclick = function() {
-      // Verifica se o usuário já acertou para evitar revelar sem necessidade
-      if (acertou) {
-        alert("Você já acertou o bairro!");
-        return;
-      }
-      
-      // Confirma se o usuário realmente quer desistir
-      if (confirm("Tem certeza que deseja desistir e revelar o bairro?")) {
-        revelarBairroDoDia();
-      }
-    };
-    
-    return container;
-  }
-});
-
-// Adiciona o controle do botão desistir ao mapa
-mymap.addControl(new botaoDesistir());
-
-// 3. Crie a função para revelar o bairro do dia
-function revelarBairroDoDia() {
-  // Remove o bairro escurecido (referência ao polígono preto inicial)
-  mymap.eachLayer(function(layer) {
-    // Verifica se a camada tem o estilo do bairro do dia (polígono preto)
-    if (layer.feature && layer.feature === bairroPrinc) {
-      mymap.removeLayer(layer);
-    }
-  });
-  
-  // Adiciona o bairro do dia com cor vermelha (indicando derrota)
-  const bairroRevelado = L.geoJSON(bairroPrinc, {
-    style: function(feature) {
-      return { 
-        color: 'purple', 
-        fillColor: 'purple', 
-        fillOpacity: 0.7,
-        weight: 3
-      };
-    },
-    onEachFeature: function(feature, layer) {
-      // Adiciona popup com o nome do bairro
-      layer.bindPopup(
-        `<strong>${feature.properties.nome}</strong><br>Este era o bairro correto!`
-      ).openPopup();
-      
-      // Faz o popup abrir automaticamente
-      layer.on('click', function() {
-        layer.openPopup();
-      });
-    }
-  }).addTo(mymap);
-  
-  // Centraliza e dá zoom no bairro revelado
-  mymap.fitBounds(bairroRevelado.getBounds(), { padding: [50, 50] });
-  
-  // Atualiza a interface para indicar que o jogo acabou
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = `
-    <h3>Jogo finalizado</h3>
-    <p>O bairro correto era: <strong>${bairroPrinc.properties.nome}</strong></p>
-    <p>Volte amanhã para tentar novamente!</p>
-  `;
-  
-  // Desabilita o input para evitar mais tentativas
-  document.getElementById("bairro-input").disabled = true;
-  document.getElementById("enviar-btn").disabled = true;
-  
-  // Marca o jogo como finalizado (não com acerto)
-  acertou = false;
-  bairrocerto = bairroPrinc.properties.nome;
-}
 
 // 2. Crie o controle para o botão de dica
 const botaoDica = L.Control.extend({
@@ -598,7 +549,7 @@ const botaoDica = L.Control.extend({
 
   onAdd: function(map) {
     const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    container.innerHTML = '<button id="botaoDica" class="botao-dica">Dica</button>';
+    container.innerHTML = '<button id="botaoDica" class="botao-dica">Dica (legado)</button>';
     
     container.onclick = function() {
       // Verifica se o usuário já acertou
