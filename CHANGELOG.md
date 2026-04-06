@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.1.0] 2026-04-06
+
+### Removed
+
+- Removed the "Desistir" (Give Up) button to maintain focus on discovery and attempts.
+
+### Deprecated
+
+- The "Dica (legado)" (Legacy Hint) button is now deprecated and will be removed in a future release.
+
+### Fixed
+
+- Fixed daily neighborhood seed generation to depend only on date (removed seconds for consistent daily selection).
+- Improved neighborhood input validation with error messages for invalid entries.
+
+### Changed
+
+- Updated gameplay instructions in the README to reflect button changes.
+- Added a 60-character limit to the neighborhood input field.
+- Improved code quality by refactoring DOM manipulation to use proper methods.
+
 ## [2.0.0] 2026-04-06
 
 ### Added
