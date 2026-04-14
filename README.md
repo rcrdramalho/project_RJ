@@ -37,3 +37,8 @@ npm run dev
 
 - `Dica (legado)` continua disponível nesta versão, mas está em processo de descontinuação.
 - O botão `Desistir` foi removido para manter a experiência centrada em tentativa e descoberta.
+
+## Segurança
+
+- A aplicação usa uma Content Security Policy para restringir origens permitidas de scripts, estilos e outros recursos.
+- Recursos externos carregados por CDN usam políticas mais restritivas de `referrer` e `crossorigin`.
