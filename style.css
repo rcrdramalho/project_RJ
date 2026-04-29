@@ -406,7 +406,7 @@ html, body {
 }
 
 /* Ajusta os botões para ficarem mais próximos e sem margens extras */
-.botao-dica {
+.botao-regioes {
   margin: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -428,20 +428,3 @@ html, body {
   margin-top: 5px;
 }
 
-.botao-dica {
-  background-color: #ff9800; /* Laranja para diferenciar */
-  color: white;
-  padding: 7px 7px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.botao-dica:hover {
-  background-color: #e67e00; /* Laranja mais escuro no hover */
-}

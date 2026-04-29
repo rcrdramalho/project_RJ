@@ -525,36 +525,3 @@ mymap.setMinZoom(9); // Define um zoom mínimo seguro
 mymap.setMaxZoom(14); // Define um zoom máximo permitido
 mymap.setMaxBounds(mymap.getBounds()); // Impede que os jogadores naveguem para fora do mapa
 
-// 2. Crie o controle para o botão de dica
-const botaoDica = L.Control.extend({
-  options: {
-    position: 'topright'
-  },
-
-  onAdd: function(map) {
-    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-    container.innerHTML = '<button id="botaoDica" class="botao-dica">Dica (legado)</button>';
-    
-    container.onclick = function() {
-      // Verifica se o usuário já acertou
-      if (acertou) {
-        alert("Você já acertou o bairro!");
-        return;
-      }
-      
-      // Cria a dica no formato solicitado
-      const nomeBairro = bairroPrinc.properties.nome;
-      const primeiraLetra = nomeBairro.charAt(0);
-      const asteriscos = '*'.repeat(nomeBairro.length - 1);
-      const dicaFormatada = primeiraLetra + asteriscos;
-      
-      // Exibe a dica em um alert simples
-      alert(`Nome: ${dicaFormatada}`);
-    };
-    
-    return container;
-  }
-});
-
-// 3. Adiciona o controle ao mapa
-mymap.addControl(new botaoDica());

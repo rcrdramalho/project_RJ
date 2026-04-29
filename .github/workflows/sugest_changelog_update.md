@@ -103,3 +103,11 @@ Structure:
 - Either:
   - No-op + explanation
   - OR a patch to CHANGELOG.md + explanation comment
+
+## Final Step: Submit via Safe-Output Tools
+
+Once your've determinated the action:
+- **If changes needed**: Call the `add_comment` safe-output with your suggested changelog update
+- **If no changes needed**: Call the `noop` safe-output tool explaining why
+
+Do NOT end your analysis without calling one of these tools. This is required for the workflow to complete successfully
