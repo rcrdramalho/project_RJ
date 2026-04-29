@@ -269,24 +269,6 @@ body {
   text-align: center;
 }
 
-.botao-regioes {
-  background-color: #4caf50;
-  color: white;
-  padding: 7px 7px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.botao-regioes:hover {
-  background-color: #3a803d;
-}
-
-
 #overlay {
   position: fixed;
   top: 0;
@@ -424,7 +406,6 @@ html, body {
 }
 
 /* Ajusta os botões para ficarem mais próximos e sem margens extras */
-.botao-regioes,
 .botao-dica {
   margin: 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
