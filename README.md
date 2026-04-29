@@ -30,6 +30,7 @@ npm run dev
 - Coloração por proximidade
 - Indicação de direção para orientar o próximo palpite
 - Resumo do melhor palpite até o momento
+- Botão para copiar um resumo da partida e compartilhar o progresso
 - Destaque visual quando o jogador acerta
 - Modo fácil com exibição das regiões
 
