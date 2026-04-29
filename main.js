@@ -222,6 +222,7 @@ const input = document.getElementById("bairro-input");
 const button = document.getElementById("enviar-btn");
 const tentativasCount = document.getElementById("tentativas-count");
 const melhorPalpite = document.getElementById("melhor-palpite");
+const compartilharBtn = document.getElementById("compartilhar-btn");
 
 function atualizarTentativas() {
   tentativasCount.textContent = tentativas;
@@ -278,6 +279,42 @@ function adicionarMensagemResultado(resultado, tag, texto) {
   const element = document.createElement(tag);
   element.textContent = texto;
   resultado.appendChild(element);
+}
+
+function montarResumoCompartilhavel() {
+  const linhas = [
+    "BairroGuessr",
+    `Tentativas: ${tentativas}`,
+  ];
+
+  if (bairrosDigitados.length > 0) {
+    const melhor = bairrosDigitados[0];
+    linhas.push(
+      `Melhor palpite: ${melhor.nome} (${melhor.distancia.toFixed(2)} km)`
+    );
+  } else {
+    linhas.push("Melhor palpite: nenhum ainda");
+  }
+
+  if (acertou) {
+    linhas.push(`Resultado: acertei ${bairrocerto}`);
+  }
+
+  return linhas.join("\n");
+}
+
+async function compartilharProgresso() {
+  const resumo = montarResumoCompartilhavel();
+
+  try {
+    await navigator.clipboard.writeText(resumo);
+    compartilharBtn.textContent = "Progresso copiado!";
+    setTimeout(function () {
+      compartilharBtn.textContent = "Compartilhar progresso";
+    }, 2000);
+  } catch (error) {
+    alert(resumo);
+  }
 }
 
 //Tentativas
@@ -395,6 +432,10 @@ input.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     processarTentativa();
   }
+});
+
+compartilharBtn.addEventListener("click", function () {
+  compartilharProgresso();
 });
 
 // Função para inicializar a celebração (adicione esta função ao seu código)
