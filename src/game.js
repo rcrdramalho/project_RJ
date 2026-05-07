@@ -12,6 +12,7 @@ import {
   bindHelpModal,
   updateTentativas,
   updateMelhorPalpite,
+  updateDicaProximidade,
   setShareFeedback,
   clearResultado,
   appendMensagem,
@@ -43,6 +44,22 @@ function calcularCor(distance) {
   return `rgb(${red}, ${green}, 42)`;
 }
 
+function classificarProximidade(distance) {
+  if (distance <= 3) {
+    return "muito perto";
+  }
+
+  if (distance <= 8) {
+    return "perto";
+  }
+
+  if (distance <= 18) {
+    return "na região";
+  }
+
+  return "longe";
+}
+
 export function initGame() {
   const bairroPrinc = getBairroDoDia();
   const { map } = createGameMap(bairroPrinc);
@@ -61,6 +78,7 @@ export function initGame() {
   configureMapBounds(map);
   updateTentativas(elements.tentativasCount, state.tentativas);
   updateMelhorPalpite(elements.melhorPalpite, state.bairrosDigitados);
+  updateDicaProximidade(elements.dicaProximidade, state.bairrosDigitados);
 
   function compartilharProgresso() {
     const resumo = montarResumoCompartilhavel(state);
@@ -112,15 +130,18 @@ export function initGame() {
       units: "kilometers",
     });
     const direcao = obterDirecao(centroid2, centroid1);
+    const faixaProximidade = classificarProximidade(distance);
 
     state.bairrosDigitados.push({
       nome: feature.properties.nome,
       distancia: distance,
       direcao,
+      faixaProximidade,
       feature,
     });
     state.bairrosDigitados.sort((a, b) => a.distancia - b.distancia);
     updateMelhorPalpite(elements.melhorPalpite, state.bairrosDigitados);
+    updateDicaProximidade(elements.dicaProximidade, state.bairrosDigitados);
 
     if (feature === bairroPrinc) {
       const layer = addFeatureLayer(map, feature, {

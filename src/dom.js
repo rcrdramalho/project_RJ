@@ -4,6 +4,7 @@ export function getElements() {
     button: document.getElementById("enviar-btn"),
     tentativasCount: document.getElementById("tentativas-count"),
     melhorPalpite: document.getElementById("melhor-palpite"),
+    dicaProximidade: document.getElementById("dica-proximidade"),
     compartilharBtn: document.getElementById("compartilhar-btn"),
     resultado: document.getElementById("resultado"),
     celebration: document.getElementById("celebration"),
@@ -50,6 +51,18 @@ export function updateMelhorPalpite(melhorPalpite, bairrosDigitados) {
   const melhor = bairrosDigitados[0];
   melhorPalpite.textContent =
     `Melhor palpite: ${melhor.nome} (${melhor.distancia.toFixed(2)} km)`;
+}
+
+export function updateDicaProximidade(dicaProximidade, bairrosDigitados) {
+  if (bairrosDigitados.length === 0) {
+    dicaProximidade.textContent =
+      "Proximidade da última tentativa: aguardando palpite";
+    return;
+  }
+
+  const ultimoPalpite = bairrosDigitados[bairrosDigitados.length - 1];
+  dicaProximidade.textContent =
+    `Proximidade da última tentativa: ${ultimoPalpite.faixaProximidade}`;
 }
 
 export function setShareFeedback(compartilharBtn, texto) {

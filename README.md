@@ -29,6 +29,7 @@ npm run dev
 - Autocomplete de bairros
 - Coloração por proximidade
 - Indicação de direção para orientar o próximo palpite
+- Dica textual de proximidade para o último palpite
 - Resumo do melhor palpite até o momento
 - Botão para copiar um resumo da partida e compartilhar o progresso
 - Destaque visual quando o jogador acerta
