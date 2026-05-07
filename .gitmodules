@@ -1,0 +1,3 @@
+[submodule "external_repos/project_RJ"]
+	path = external_repos/project_RJ
+	url = https://github.com/rcrdramalho/project_RJ
